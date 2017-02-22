@@ -75,15 +75,8 @@ int main()
     //loading map
     MapSystem *mapSystem = new MapSystem;
 
-    if (mapSystem->loadMap("C:\\Counter-Strike 2D\\maps\\de_dust2.map") == 0)
-    {
-        std::cout << "MAP LOADED\n";
-        //std::cout << mapSystem->tileFrame[0][0];
-    }
-    else
-    {
-        std::cout << "ERROR LOADING MAP\n";
-    }
+    if (mapSystem->loadMap("C:\\Counter-Strike 2D\\maps\\de_dust2.map") > 0)
+        return -1;
 
     int i = 0;
     int ROW_COUNT = mapSystem->mapWidth + 1;
@@ -117,30 +110,23 @@ int main()
         {
             if(event.type == sf::Event::Closed)
                 window.close();
+        }
 
-            if (event.type == sf::Event::KeyPressed)
-            {
-                if (event.key.code == sf::Keyboard::Escape)
-                {
-                    window.close();
-                }
-                if (event.key.code == sf::Keyboard::W)
-                {
-                    view.move(0, -32);
-                }
-                if (event.key.code == sf::Keyboard::A)
-                {
-                    view.move(-32, 0);
-                }
-                if (event.key.code == sf::Keyboard::S)
-                {
-                    view.move(0, 32);
-                }
-                if (event.key.code == sf::Keyboard::D)
-                {
-                    view.move(32, 0);
-                }
-            }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        {
+            view.move(0, -8);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            view.move(-8, 0);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        {
+            view.move(0, 8);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            view.move(8, 0);
         }
 
         // draw the map
